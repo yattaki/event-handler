@@ -1,0 +1,47 @@
+{
+  "name": "@yattaki/event-handler",
+  "version": "1.0.0",
+  "description": "Module that controls the event.",
+  "main": "public/event-handler.js",
+  "module": "public/event-handler.esm.js",
+  "files": [
+    "public",
+    "types"
+  ],
+  "types": "types/event-handler.d.ts",
+  "scripts": {
+    "rollup": "rollup -c",
+    "rollup:dev": "npm run rollup -- -w -m inline --environment BUILD:development",
+    "eslint": "eslint src/event-handler.ts",
+    "types": "tsc --outDir public --declarationDir types --declaration true",
+    "typedoc": "typedoc --out docs src --theme minimal --includeVersion",
+    "dev": "npm run rollup:dev",
+    "build": "npm run eslint && npm run rollup && npm run types && npm run typedoc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yattaki/event-handler.git"
+  },
+  "keywords": [],
+  "author": "yattaki <kozinnyou2015@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yattaki/event-handler/issues"
+  },
+  "homepage": "https://github.com/yattaki/event-handler#readme",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^4.1.1",
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "@typescript-eslint/parser": "^2.28.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "rollup": "^2.6.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "typedoc": "^0.17.4",
+    "typescript": "^3.8.3"
+  }
+}
