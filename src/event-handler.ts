@@ -108,7 +108,7 @@ class EventHandler {
         const event = {
           type,
           target: this,
-          data: { ...options.data, ...data }
+          data: { ...(options.data || {}), ...data }
         }
 
         const promise = listener(event)

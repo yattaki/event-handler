@@ -2738,16 +2738,16 @@ img {
 			<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 				<h2>Install</h2>
 			</a>
-			<pre><code>  npm i <span class="hljs-meta">@yattaki</span>/event-<span class="hljs-keyword">handler</span></code></pre>
+			<pre><code class="language-console">  npm i @yattaki/event-handler</code></pre>
 			<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 				<h2>Example</h2>
 			</a>
-			<pre><code class="language-Typescript">    <span class="hljs-keyword">import</span> EventHandler <span class="hljs-keyword">from</span> <span class="hljs-string">'@yattaki/event-handler'</span>
+			<pre><code class="language-Typescript">  <span class="hljs-keyword">import</span> EventHandler <span class="hljs-keyword">from</span> <span class="hljs-string">'@yattaki/event-handler'</span>
 
-    <span class="hljs-keyword">const</span> eventHandler = <span class="hljs-keyword">new</span> EventHandler()
+  <span class="hljs-keyword">const</span> eventHandler = <span class="hljs-keyword">new</span> EventHandler()
 
-    eventHandler.addEventListener(<span class="hljs-string">'sample'</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> { <span class="hljs-built_in">console</span>.log(e.data.text) })
-    eventHandler.dispatchEvent(<span class="hljs-string">'sample'</span>, { text: <span class="hljs-string">'dispatch sample!'</span> }) <span class="hljs-comment">// dispatch sample!</span></code></pre>
+  eventHandler.addEventListener(<span class="hljs-string">'sample'</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> { <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${e.data.text}</span> <span class="hljs-subst">${e.<span class="hljs-keyword">type</span>}</span>!`</span>) })
+  eventHandler.dispatchEvent(<span class="hljs-string">'sample'</span>, { text: <span class="hljs-string">'dispatch'</span> }) <span class="hljs-comment">// dispatch sample!</span></code></pre>
 			<a href="#link" id="link" style="color: inherit; text-decoration: none;">
 				<h2>Link</h2>
 			</a>

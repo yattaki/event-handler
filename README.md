@@ -8,19 +8,19 @@
 
 ## Install
 
-  ```
+  ```console
   npm i @yattaki/event-handler
   ```
 
 ## Example
 
   ```Typescript
-    import EventHandler from '@yattaki/event-handler'
+  import EventHandler from '@yattaki/event-handler'
 
-    const eventHandler = new EventHandler()
+  const eventHandler = new EventHandler()
 
-    eventHandler.addEventListener('sample', (e) => { console.log(e.data.text) })
-    eventHandler.dispatchEvent('sample', { text: 'dispatch sample!' }) // dispatch sample!
+  eventHandler.addEventListener('sample', (e) => { console.log(`${e.data.text} ${e.type}!`) })
+  eventHandler.dispatchEvent('sample', { text: 'dispatch' }) // dispatch sample!
   ```
 
 ## Link
