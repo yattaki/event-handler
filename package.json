@@ -1,6 +1,6 @@
 {
   "name": "@yattaki/event-handler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Module that controls the event.",
   "main": "public/event-handler.js",
   "module": "public/event-handler.esm.js",
