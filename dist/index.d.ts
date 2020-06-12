@@ -1,5 +1,9 @@
 /** Specifies characteristics about the listener. */
-interface EventHandlerOptions {
+interface EventHandlerOptions<T extends {
+    [key: string]: any;
+} = {
+    [key: string]: any;
+}> {
     /**
      * A Boolean indicating that the listener should be invoked at most once after being added.
      * If true, the listener would be automatically removed when invoked.
@@ -13,9 +17,7 @@ interface EventHandlerOptions {
     /**
      * An object to be passed as an argument of the listener.
      */
-    data?: {
-        [key: string]: any;
-    };
+    data?: T;
 }
 /** Argument object that the listener receives. */
 export declare type EventHandlerListenerEvent<T extends {
@@ -34,10 +36,14 @@ export declare type EventHandlerListenerEvent<T extends {
 /** This represents a listener. */
 export declare type EventHandlerListener<T extends {
     [key: string]: any;
-} = {}, U extends string = string, V extends EventHandler = EventHandler> = (ev: EventHandlerListenerEvent<{
-    [key: string]: any;
-} & T, U, V>) => void | Promise<void>;
-declare class EventHandler {
+} = {}, U extends string = string, V extends EventHandler = EventHandler> = (ev: EventHandlerListenerEvent<T, U, V>) => void | Promise<void>;
+/** This represents the data map when it was dispatched. */
+export declare type EventHandlerDataMap = {
+    [key: string]: {
+        [key: string]: any;
+    };
+};
+declare class EventHandler<M extends EventHandlerDataMap = EventHandlerDataMap> {
     private readonly _map;
     /**
      * Add a new listener.
@@ -45,24 +51,18 @@ declare class EventHandler {
      * @param listener This represents the listener to add.
      * @param options Specifies characteristics about the event listener.
      */
-    addEventListener<T extends EventHandlerOptions = {}, U extends string = string, V extends this = this>(type: U, listener: EventHandlerListener<T extends {
-        data: {
-            [key: string]: any;
-        };
-    } ? T['data'] : {}, U, V>, options?: T): boolean;
+    addEventListener<T extends Extract<keyof M, string>, U extends Partial<M[T]> = M[T], V extends this = this>(type: T, listener: EventHandlerListener<M[T] & U, T, V>, options?: EventHandlerOptions<U>): boolean;
     /**
      * Remove the listener.
      * @param type This represents the name of the event.
      * @param listener This represents the listener to remove.
      */
-    removeEventListener(type: string, listener: EventHandlerListener): boolean;
+    removeEventListener(type: Extract<keyof M, string>, listener: EventHandlerListener): boolean;
     /**
      * Execute the registered event.
      * @param type This represents the name of the event.
      * @param data An object to be passed as an argument of the listener.
      */
-    dispatchEvent(type: string, data?: {
-        [key: string]: any;
-    }): Promise<void>;
+    dispatchEvent<T extends Extract<keyof M, string>>(type: T, data?: M[T]): Promise<void>;
 }
 export default EventHandler;

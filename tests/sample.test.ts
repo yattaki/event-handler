@@ -1,4 +1,4 @@
-import EventHandler from '../src/event-handler'
+import EventHandler from '../src/index'
 
 describe('EventHandler', () => {
   test('AddEventListener.', async () => {

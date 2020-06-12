@@ -1,0 +1,6 @@
+/tests
+/src
+node_modules
+.eslintignore
+rollup.config.js
+tsconfig.json

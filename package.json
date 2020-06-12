@@ -1,24 +1,20 @@
 {
   "name": "@yattaki/event-handler",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Module that controls the event.",
-  "main": "public/event-handler.js",
-  "module": "public/event-handler.esm.js",
-  "files": [
-    "public",
-    "types"
-  ],
-  "types": "types/event-handler.d.ts",
+  "main": "dist/index.cjs.js",
+  "jsdelivr": "dist/index.iife.js",
+  "browser": "dist/index.iife.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "rollup": "rollup -c",
-    "rollup:dev": "npm run rollup -- -w -m inline --environment BUILD:development",
-    "eslint": "eslint src/event-handler.ts",
-    "types": "tsc --emitDeclarationOnly --declarationDir types --declaration true",
-    "typedoc": "typedoc --out docs src --theme minimal --includeVersion",
+    "eslint": "eslint src/index.ts",
+    "types": "tsc --emitDeclarationOnly --declarationDir dist --declaration true",
     "jest": "jest",
-    "dev": "npm run rollup:dev",
-    "build": "npm run eslint && npm run jest && npm run rollup && npm run types && npm run typedoc",
-    "update": "git push && npm publish"
+    "dev": "npm run rollup -- -w -m inline --environment BUILD:development",
+    "build": "npm run eslint && npm run jest && npm run rollup & npm run types",
+    "update": "npm publish && git push"
   },
   "repository": {
     "type": "git",
@@ -47,7 +43,6 @@
     "rollup": "^2.6.1",
     "rollup-plugin-terser": "^5.3.0",
     "ts-jest": "^25.3.1",
-    "typedoc": "^0.17.4",
     "typescript": "^3.8.3"
   },
   "jest": {

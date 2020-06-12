@@ -1,5 +1,5 @@
 /** Specifies characteristics about the listener. */
-interface EventHandlerOptions {
+interface EventHandlerOptions<T extends { [key: string]: any } = { [key: string]: any }> {
   /**
    * A Boolean indicating that the listener should be invoked at most once after being added.
    * If true, the listener would be automatically removed when invoked.
@@ -15,7 +15,7 @@ interface EventHandlerOptions {
   /**
    * An object to be passed as an argument of the listener.
    */
-  data?: { [key: string]: any }
+  data?: T
 }
 
 /** Argument object that the listener receives. */
@@ -35,9 +35,14 @@ export type EventHandlerListenerEvent<T extends { [key: string]: any } = {}, U e
 
 /** This represents a listener. */
 export type EventHandlerListener<T extends { [key: string]: any } = {}, U extends string = string, V extends EventHandler = EventHandler> =
-  (ev: EventHandlerListenerEvent<{ [key: string]: any } & T, U, V>) => void | Promise<void>
+  (ev: EventHandlerListenerEvent<T, U, V>) => void | Promise<void>
 
-class EventHandler {
+/** This represents the data map when it was dispatched. */
+export type EventHandlerDataMap = {
+  [key: string]: { [key: string]: any }
+}
+
+class EventHandler<M extends EventHandlerDataMap = EventHandlerDataMap> {
   private readonly _map: Map<string, { listener: EventHandlerListener<any, any, any>, options: EventHandlerOptions }[]> = new Map()
 
   /**
@@ -46,10 +51,10 @@ class EventHandler {
    * @param listener This represents the listener to add.
    * @param options Specifies characteristics about the event listener.
    */
-  addEventListener<T extends EventHandlerOptions = {}, U extends string = string, V extends this = this> (
-    type: U,
-    listener: EventHandlerListener<T extends { data: { [key: string]: any } } ? T['data'] : {}, U, V>,
-    options = {} as T
+  addEventListener<T extends Extract<keyof M, string>, U extends Partial<M[T]> = M[T], V extends this = this> (
+    type: T,
+    listener: EventHandlerListener<M[T] & U, T, V>,
+    options: EventHandlerOptions<U> = {}
   ) {
     let onMaps = this._map.get(type)
     if (!onMaps) {
@@ -77,7 +82,7 @@ class EventHandler {
    * @param type This represents the name of the event.
    * @param listener This represents the listener to remove.
    */
-  removeEventListener (type: string, listener: EventHandlerListener) {
+  removeEventListener (type: Extract<keyof M, string>, listener: EventHandlerListener) {
     const onMaps = this._map.get(type)
     if (onMaps) {
       let index = 0
@@ -99,7 +104,7 @@ class EventHandler {
    * @param type This represents the name of the event.
    * @param data An object to be passed as an argument of the listener.
    */
-  async dispatchEvent (type: string, data: { [key: string]: any } = {}) {
+  async dispatchEvent<T extends Extract<keyof M, string>> (type: T, data: M[T] = {} as M[T]) {
     const promises: (Promise<void> | void)[] = []
 
     const onMaps = this._map.get(type)
