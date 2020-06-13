@@ -1,5 +1,5 @@
 /** Specifies characteristics about the listener. */
-interface EventHandlerOptions<T extends {
+export interface EventHandlerOptions<T extends {
     [key: string]: any;
 } = {
     [key: string]: any;
@@ -20,9 +20,9 @@ interface EventHandlerOptions<T extends {
     data?: T;
 }
 /** Argument object that the listener receives. */
-export declare type EventHandlerListenerEvent<T extends {
+export interface EventHandlerListenerEvent<T extends {
     [key: string]: any;
-} = {}, U extends string = string, V extends EventHandler = EventHandler> = {
+} = {}, U extends string = string, V extends EventHandler = EventHandler> {
     /** This represents the name of the event. */
     type: U;
     /** This represents the class that received the event. */
@@ -32,17 +32,17 @@ export declare type EventHandlerListenerEvent<T extends {
      * When passed, it may be overwritten.
      */
     data: T;
-};
+}
 /** This represents a listener. */
 export declare type EventHandlerListener<T extends {
     [key: string]: any;
 } = {}, U extends string = string, V extends EventHandler = EventHandler> = (ev: EventHandlerListenerEvent<T, U, V>) => void | Promise<void>;
 /** This represents the data map when it was dispatched. */
-export declare type EventHandlerDataMap = {
+export interface EventHandlerDataMap {
     [key: string]: {
         [key: string]: any;
     };
-};
+}
 declare class EventHandler<M extends EventHandlerDataMap = EventHandlerDataMap> {
     private readonly _map;
     /**

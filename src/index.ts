@@ -1,5 +1,5 @@
 /** Specifies characteristics about the listener. */
-interface EventHandlerOptions<T extends { [key: string]: any } = { [key: string]: any }> {
+export interface EventHandlerOptions<T extends { [key: string]: any } = { [key: string]: any }> {
   /**
    * A Boolean indicating that the listener should be invoked at most once after being added.
    * If true, the listener would be automatically removed when invoked.
@@ -19,7 +19,7 @@ interface EventHandlerOptions<T extends { [key: string]: any } = { [key: string]
 }
 
 /** Argument object that the listener receives. */
-export type EventHandlerListenerEvent<T extends { [key: string]: any } = {}, U extends string = string, V extends EventHandler = EventHandler> = {
+export interface EventHandlerListenerEvent<T extends { [key: string]: any } = {}, U extends string = string, V extends EventHandler = EventHandler> {
   /** This represents the name of the event. */
   type: U
 
@@ -38,7 +38,7 @@ export type EventHandlerListener<T extends { [key: string]: any } = {}, U extend
   (ev: EventHandlerListenerEvent<T, U, V>) => void | Promise<void>
 
 /** This represents the data map when it was dispatched. */
-export type EventHandlerDataMap = {
+export interface EventHandlerDataMap {
   [key: string]: { [key: string]: any }
 }
 

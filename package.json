@@ -13,8 +13,13 @@
     "types": "tsc --emitDeclarationOnly --declarationDir dist --declaration true",
     "jest": "jest",
     "dev": "npm run rollup -- -w -m inline --environment BUILD:development",
-    "build": "npm run eslint && npm run jest && npm run rollup & npm run types",
-    "update": "npm publish && git push"
+    "clean-dist": "rimraf dist",
+    "build": "npm run eslint && npm run jest && npm run clean-dist && npm run rollup && npm run types",
+    "staging": "npm run build && git add .",
+    "major-update": "npm version major && git add . && git commit --amend --no-edit",
+    "minor-update": "npm version minor && git add . && git commit --amend --no-edit",
+    "patch-update": "npm version patch && git add . && git commit --amend --no-edit",
+    "push": "npm publish && git push"
   },
   "repository": {
     "type": "git",
@@ -40,6 +45,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^25.3.0",
+    "rimraf": "^3.0.2",
     "rollup": "^2.6.1",
     "rollup-plugin-terser": "^5.3.0",
     "ts-jest": "^25.3.1",
