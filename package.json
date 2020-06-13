@@ -1,6 +1,6 @@
 {
   "name": "@yattaki/event-handler",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Module that controls the event.",
   "main": "dist/index.cjs.js",
   "jsdelivr": "dist/index.iife.js",
